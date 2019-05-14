@@ -57,17 +57,13 @@ I also have another target in the same project. It is needed to build the framew
 The main target does not depend on the framework in the project settings only through the configuration file. ( It is important )
 
 ## Steps to reproduce
-1. Open framework project - DebugProblemApp.xcodeproj
-2. Choose a scheme to build the framework - DevPod
-3. Built it for iOS simulator
-2. Then copy the results framework and dSYM from Dereived Data in the DevPodFramework folder.
-4. Switch to main scheme - DebugProblemApp
-5. Add breakpoint to DevPodViewController file - DevPod/DevPodViewController.swift line 7
-6. Run
-7. Check that everything works - the variable (self) is displayed // or it may not work already
-8. Delete everything from Derived Data folder
-9. Run again
-10. Check that variable information is no longer displayed
+1. Open framework project - DevPod/DevPod.xcodeproj
+2. Run it. It should automatically transfer files to the DevPodFramework folder
+3. Delete everything from Derived Data folder
+4. Open main project - DebugProblemApp.xcodeproj
+5. Add breakpoint to DevPodViewController file - DevPod/DevPodViewController.swift line 7 (Added files are just references/links they don’t participate in the main target build)
+6. Run it
+7. Variable information is no longer displayed
 
 ### Result
 Debug panel does not display types, only names.
