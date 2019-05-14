@@ -1,3 +1,11 @@
+//
+//  DevPod.h
+//  DevPod
+//
+//  Created by Vadim Smal on 5/14/19.
+//  Copyright © 2019 CognitiveDisson. All rights reserved.
+//
+
 #import <UIKit/UIKit.h>
 
 //! Project version number for DevPod.

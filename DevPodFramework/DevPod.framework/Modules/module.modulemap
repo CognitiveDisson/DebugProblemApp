@@ -1,0 +1,11 @@
+framework module DevPod {
+  umbrella header "DevPod.h"
+
+  export *
+  module * { export * }
+}
+
+module DevPod.Swift {
+    header "DevPod-Swift.h"
+    requires objc
+}
