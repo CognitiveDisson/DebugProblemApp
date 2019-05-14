@@ -69,9 +69,9 @@ The main target does not depend on the framework in the project settings only th
 9. Run again
 10. Check that variable information is no longer displayed
 
-Result:
+### Result
 Debug panel does not display types, only names.
 
-Additional Information:
+## Additional Information
 In this case, the path to the source files (the files which the framework originated from) was not changed (equal).
 If the framework was from an Objective C files, debug would work. (Verified)
