@@ -146,7 +146,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "prebuilded_folder_name='DevPodFramework'\nroot_path=$(builtin cd $SRCROOT && git rev-parse --show-toplevel)\nprebuilded_folder=`realpath ${root_path}/${prebuilded_folder_name}`\nframework_path=`realpath ${CONFIGURATION_BUILD_DIR}/DevPod.framework`\ndsym_path=`realpath ${BUILD_DIR}/${CONFIGURATION}${EFFECTIVE_PLATFORM_NAME}/DevPod.framework.dSYM`\nrm -r ${prebuilded_folder}/*\ncp -R ${framework_path} ${prebuilded_folder}\ncp -R ${dsym_path} ${prebuilded_folder}\n";
+			shellScript = "prebuilded_folder_name='DevPodFramework.noindex'\nroot_path=$(builtin cd $SRCROOT && git rev-parse --show-toplevel)\nprebuilded_folder=`realpath ${root_path}/${prebuilded_folder_name}`\nframework_path=`realpath ${CONFIGURATION_BUILD_DIR}/DevPod.framework`\ndsym_path=`realpath ${BUILD_DIR}/${CONFIGURATION}${EFFECTIVE_PLATFORM_NAME}/DevPod.framework.dSYM`\nrm -r ${prebuilded_folder}/*\ncp -R ${framework_path} ${prebuilded_folder}\ncp -R ${dsym_path} ${prebuilded_folder}\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -305,7 +305,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ru.cognitivedisson.DevPod;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				STRIP_SWIFT_SYMBOLS = NO;
+				STRIP_STYLE = "non-global";
+				STRIP_SWIFT_SYMBOLS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -332,7 +333,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ru.cognitivedisson.DevPod;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				STRIP_SWIFT_SYMBOLS = NO;
+				STRIP_STYLE = "non-global";
+				STRIP_SWIFT_SYMBOLS = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

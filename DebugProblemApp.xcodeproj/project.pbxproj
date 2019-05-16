@@ -176,7 +176,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -x\nframework_name='DevPod'\nprebuilded_folder_name='DevPodFramework'\nroot_path=$(builtin cd $SRCROOT && git rev-parse --show-toplevel)\nprebuilded_folder=`realpath ${root_path}/${prebuilded_folder_name}`\ndestination_folder=`realpath ${CONFIGURATION_BUILD_DIR}/DevPod`\nprebuilded_folder_md5=`find ${prebuilded_folder} -type f -exec md5 {} + | sort -k 2 | awk '{ print $4 }' | md5`\ndestination_folder_md5=`find ${destination_folder} -type f -exec md5 {} + | sort -k 2 | awk '{ print $4 }' | md5`\nif [ \"$prebuilded_folder_md5\" == \"$destination_folder_md5\" ]; then\necho 'Equal'\nelse\necho \"Copy ${prebuilded_folder} to ${destination_folder}\"\nrm -r ${destination_folder}/*\ncp -R ${prebuilded_folder} ${destination_folder}\nfi\n";
+			shellScript = "set -x\nframework_name='DevPod'\nprebuilded_folder_name='DevPodFramework.noindex'\nroot_path=$(builtin cd $SRCROOT && git rev-parse --show-toplevel)\nprebuilded_folder=`realpath ${root_path}/${prebuilded_folder_name}`\ndestination_folder=`realpath ${CONFIGURATION_BUILD_DIR}/DevPod`\nprebuilded_folder_md5=`find ${prebuilded_folder} -type f -exec md5 {} + | sort -k 2 | awk '{ print $4 }' | md5`\ndestination_folder_md5=`find ${destination_folder} -type f -exec md5 {} + | sort -k 2 | awk '{ print $4 }' | md5`\nif [ \"$prebuilded_folder_md5\" == \"$destination_folder_md5\" ]; then\necho 'Equal'\nelse\necho \"Copy ${prebuilded_folder} to ${destination_folder}\"\nrm -r ${destination_folder}/*\ncp -R ${prebuilded_folder} ${destination_folder}\nfi\n";
 		};
 		EF987C9F228ADF430053197A /* [Prebuilded] Copy inside app */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -194,7 +194,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "mkdir ${BUILT_PRODUCTS_DIR}/DebugProblemApp.app/Frameworks\ncp -R ${BUILT_PRODUCTS_DIR}/DevPod/DevPod.framework ${BUILT_PRODUCTS_DIR}/DebugProblemApp.app/Frameworks/DevPod.framework\n";
+			shellScript = "frameworks_folder=${BUILT_PRODUCTS_DIR}/DebugProblemApp.app/Frameworks\nif [ ! -d \"${frameworks_folder}\" ] \nthen\nmkdir ${frameworks_folder}\nfi\nframework_path=${BUILT_PRODUCTS_DIR}/DevPod/DevPod.framework\ndestination_framework_path=${BUILT_PRODUCTS_DIR}/DebugProblemApp.app/Frameworks/DevPod.framework\nframework_md5=`find ${framework_path} -type f -exec md5 {} + | sort -k 2 | awk '{ print $4 }' | md5`\ndestination_md5=`find ${destination_framework_path} -type f -exec md5 {} + | sort -k 2 | awk '{ print $4 }' | md5`\nif [ \"$framework_md5\" == \"$destination_md5\" ]; then\necho 'Equal'\nelse\necho \"Copy ${framework_path} to ${destination_framework_path}\"\ncp -R \"${framework_path}\" \"${destination_framework_path}\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -348,6 +348,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DevPodFramework",
+				);
 				INFOPLIST_FILE = DebugProblemApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -368,6 +372,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DevPodFramework",
+				);
 				INFOPLIST_FILE = DebugProblemApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
