@@ -176,7 +176,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -x\nframework_name='DevPod'\nprebuilded_folder_name='DevPodFramework.noindex'\nroot_path=$(builtin cd $SRCROOT && git rev-parse --show-toplevel)\nprebuilded_folder=`realpath ${root_path}/${prebuilded_folder_name}`\ndestination_folder=`realpath ${CONFIGURATION_BUILD_DIR}/DevPod`\nprebuilded_folder_md5=`find ${prebuilded_folder} -type f -exec md5 {} + | sort -k 2 | awk '{ print $4 }' | md5`\ndestination_folder_md5=`find ${destination_folder} -type f -exec md5 {} + | sort -k 2 | awk '{ print $4 }' | md5`\nif [ \"$prebuilded_folder_md5\" == \"$destination_folder_md5\" ]; then\necho 'Equal'\nelse\necho \"Copy ${prebuilded_folder} to ${destination_folder}\"\nrm -r ${destination_folder}/*\ncp -R ${prebuilded_folder} ${destination_folder}\nfi\n";
+			shellScript = "set -x\nframework_name='DevPod'\nprebuilded_folder_name='DevPodFramework.noindex'\nroot_path=$(builtin cd $SRCROOT && git rev-parse --show-toplevel)\nif [ ! -d \"${root_path}/${prebuilded_folder_name}\" ]; then\necho \"error: folder ${root_path}/${prebuilded_folder_name} doesn't exist\"\nexit 1\nfi\nprebuilded_folder=`realpath ${root_path}/${prebuilded_folder_name}`\nif [ ! -d \"${CONFIGURATION_BUILD_DIR}/DevPod\" ]; then\nmkdir -p \"${CONFIGURATION_BUILD_DIR}/DevPod\"\nfi\ndestination_folder=`realpath ${CONFIGURATION_BUILD_DIR}/DevPod`\nprebuilded_folder_md5=`find ${prebuilded_folder} -type f -exec md5 {} + | sort -k 2 | awk '{ print $4 }' | md5`\ndestination_folder_md5=`find ${destination_folder} -type f -exec md5 {} + | sort -k 2 | awk '{ print $4 }' | md5`\nif [ \"$prebuilded_folder_md5\" == \"$destination_folder_md5\" ]; then\necho 'Equal'\nelse\necho \"Copy ${prebuilded_folder} to ${destination_folder}\"\nrm \"${destination_folder}\"\nmkdir \"${destination_folder}\"\ncp -R \"${prebuilded_folder}/\" \"${destination_folder}\"\nfi\n";
 		};
 		EF987C9F228ADF430053197A /* [Prebuilded] Copy inside app */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -348,10 +348,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/DevPodFramework",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = DebugProblemApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -372,10 +369,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/DevPodFramework",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = DebugProblemApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
